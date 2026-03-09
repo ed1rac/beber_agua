@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';"/>
+  <link rel="stylesheet" href="style.css">
+  <title>Hidratação</title>
+</head>
+<body>
+  <!-- Draggable area allows moving frameless window -->
+  <div class="titlebar">
+    <div class="drag-region"></div>
+    <div class="window-controls">
+      <button id="close-btn">&times;</button>
+    </div>
+  </div>
+
+  <div class="app-container glass">
+    <div class="header">
+      <h2>Hidratação</h2>
+      <div class="toggle-container">
+        <label class="switch">
+          <input type="checkbox" id="stay-top-toggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="toggle-label">Sempre no Topo</span>
+      </div>
+    </div>
+
+    <!-- Progresso de Água (9 Segmentos) -->
+    <div class="bottle-container">
+      <div class="water-level" id="water-level">
+        <!-- Efeito de onda na água -->
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+      </div>
+      
+      <!-- Segmentos divididos (9 a 1 de cima para baixo) -->
+      <div class="segments">
+        <div class="segment" id="seg-9"></div>
+        <div class="segment" id="seg-8"></div>
+        <div class="segment" id="seg-7"></div>
+        <div class="segment" id="seg-6"></div>
+        <div class="segment" id="seg-5"></div>
+        <div class="segment" id="seg-4"></div>
+        <div class="segment" id="seg-3"></div>
+        <div class="segment" id="seg-2"></div>
+        <div class="segment" id="seg-1"></div>
+      </div>
+    </div>
+
+    <div class="stats-group">
+      <div class="status-text">
+          <span id="bottle-count" class="highlight-text">0</span>
+          <span>Garrafas</span>
+      </div>
+      <div class="liters-text">
+          <span id="liters-count" class="highlight-text">0.00</span>
+          <span>Litros (L)</span>
+      </div>
+    </div>
+
+    <div class="periods-container">
+      <div class="period" id="period-morning">
+        <span class="period-label">Manhã</span>
+        <span class="period-count" id="count-morning">0<small>/3</small></span>
+      </div>
+      <div class="period" id="period-afternoon">
+        <span class="period-label">Tarde</span>
+        <span class="period-count" id="count-afternoon">0<small>/3</small></span>
+      </div>
+      <div class="period" id="period-night">
+        <span class="period-label">Noite</span>
+        <span class="period-count" id="count-night">0<small>/3</small></span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="add-btn" class="primary-btn glass-btn">Adicionar Garrafa</button>
+      <button id="undo-btn" class="secondary-btn glass-btn">Desfazer</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
