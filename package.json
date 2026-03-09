@@ -4,9 +4,25 @@
   "description": "App minimalista para controle de hidratação",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "build:win": "electron-builder --win --x64",
+    "build:linux": "electron-builder --linux --x64"
+  },
+  "build": {
+    "appId": "com.beberagua.app",
+    "productName": "Beber Agua",
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": "tar.xz",
+      "category": "Utility"
+    }
   },
   "devDependencies": {
-    "electron": "^29.0.0"
+    "electron": "^29.0.0",
+    "electron-builder": "^26.8.1"
   }
 }
