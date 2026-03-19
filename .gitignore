@@ -1,1 +1,11 @@
 node_modules/
+dist/
+dist-mac/
+dist-win/
+dist-linux/
+build_linux_log.txt
+build_linux_log_utf8.txt
+build_log.txt
+build_log_utf8.txt
+.DS_Store
+.env
