@@ -28,10 +28,14 @@ function loadData() {
   const data = JSON.parse(localStorage.getItem('hydrationDataV2'));
   const today = new Date().toLocaleDateString();
 
+  const isElectron = typeof window.electronAPI !== 'undefined';
+  document.body.classList.toggle('is-electron', isElectron);
+  document.body.classList.toggle('is-web', !isElectron);
+
   if (data) {
     if (data.stayOnTop !== undefined) {
       stayTopToggle.checked = data.stayOnTop;
-      window.electronAPI.toggleAlwaysOnTop(data.stayOnTop);
+      window.electronAPI?.toggleAlwaysOnTop?.(data.stayOnTop);
     }
     if (data.date === today && Array.isArray(data.history)) {
       hydrationHistory = data.history;
@@ -45,7 +49,7 @@ function loadData() {
     if (oldData) {
       if (oldData.stayOnTop !== undefined) {
         stayTopToggle.checked = oldData.stayOnTop;
-        window.electronAPI.toggleAlwaysOnTop(oldData.stayOnTop);
+        window.electronAPI?.toggleAlwaysOnTop?.(oldData.stayOnTop);
       }
       if (oldData.date === today && oldData.count > 0) {
          const now = Date.now();
@@ -143,19 +147,30 @@ undoBtn.addEventListener('click', () => {
 });
 
 // Switch de Stay on Top
-stayTopToggle.addEventListener('change', (e) => {
-  const isChecked = e.target.checked;
-  window.electronAPI.toggleAlwaysOnTop(isChecked);
-  saveData();
-});
+if (stayTopToggle) {
+  stayTopToggle.addEventListener('change', (e) => {
+    const isChecked = e.target.checked;
+    window.electronAPI?.toggleAlwaysOnTop?.(isChecked);
+    saveData();
+  });
+}
 
-// Fecha a aplicação
-closeBtn.addEventListener('click', () => {
-  window.electronAPI.closeApp();
-});
+// Fecha a aplicação (apenas desktop)
+if (closeBtn) {
+  closeBtn.addEventListener('click', () => {
+    window.electronAPI?.closeApp?.();
+  });
+}
 
 // Inicia
 loadData();
+
+// Registrar Service Worker para PWA / Offline em Navegador
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 
 // Verificação periódica para 'Reset Diário' enquanto aberto de forma ininterrupta
 setInterval(() => {
