@@ -8,6 +8,9 @@
 
 **Um aplicativo simples, leve e sem propagandas para lembrar desenvolvedores e estudantes de manterem a hidratação durante longas jornadas de trabalho e programação.**
 
+  <br />
+  <img src="./assets/screenshot.png" alt="Interface de Hidratação do Beber Água" width="340" />
+  <p><em>Monitor visual de hidratação diária, metas por turno e consumo em litros</em></p>
 </div>
 
 ---
